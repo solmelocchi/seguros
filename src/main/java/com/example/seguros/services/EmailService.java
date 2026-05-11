@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class EmailService {
 
-    private static final String DESTINATARIO = "solmelocchi582@gmail.com";
+    private static final String DESTINATARIO = "solmelocchi1@yahoo.com";
     private static final DateTimeFormatter FMT =
             DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
