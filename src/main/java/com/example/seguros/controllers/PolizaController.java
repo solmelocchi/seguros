@@ -85,36 +85,4 @@ public class PolizaController {
         }
     }
 
-    // PRUEBA: forzar aviso de cobro ahora
-    @GetMapping("/test/cobro")
-    public ResponseEntity<String> testCobro() {
-        try {
-            List<Poliza> polizas = polizaService.findPolizasConCobroHoy();
-            if (polizas.isEmpty()) {
-                return ResponseEntity.ok("Sin cobros para hoy (día "
-                        + java.time.LocalDate.now().getDayOfMonth() + ")");
-            }
-            emailService.enviarAvisoCobro(polizas);
-            return ResponseEntity.ok("✅ Email de cobro enviado: "
-                    + polizas.size() + " pólizas");
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
-        }
-    }
-
-    // PRUEBA: forzar aviso de renovación ahora
-    @GetMapping("/test/renovacion")
-    public ResponseEntity<String> testRenovacion() {
-        try {
-            List<Poliza> polizas = polizaService.findPolizasQueVencenProximoMes();
-            if (polizas.isEmpty()) {
-                return ResponseEntity.ok("Sin renovaciones para el próximo mes");
-            }
-            emailService.enviarAvisoRenovacion(polizas);
-            return ResponseEntity.ok("✅ Email de renovación enviado: "
-                    + polizas.size() + " pólizas");
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
-        }
-    }
 }
